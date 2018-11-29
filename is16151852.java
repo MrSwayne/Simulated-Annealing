@@ -22,9 +22,15 @@ public class is16151852 {
 
 	private static JPanel container = new JPanel();
 	private static JPanel visualPanel = new JPanel();
-	private static final File file = new File("GA2018-19.txt");
+
+
+	//Change this depending on what file you're using 
+	private static File file = new File("file.txt");
 
 	public static void main(String[] args) throws FileNotFoundException, IOException {
+		
+		if(args.length == 1)	 file = new File(args[0]);
+
 		getInitial();
 	}
 
