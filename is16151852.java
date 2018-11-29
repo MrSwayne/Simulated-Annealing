@@ -52,11 +52,12 @@ public class is16151852 {
 
 		okBtn = new JButton("Ok");
 
+		container.add(temperaturePanel);
+		container.add(coolingPanel);
 
-		okBtn.addActionListener( new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				try {
+		int res = JOptionPane.showOptionDialog(null, container, "SA", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, null, null);
+		if(res == 0) {
+			try {
 					temperature = Double.parseDouble(tempField.getText());
 					cr = Double.parseDouble(coolingField.getText());
 
@@ -104,27 +105,24 @@ public class is16151852 {
 				} catch (IOException ex) {
 					System.err.println("Error io exception");
 				}
-			}
-		});
-
-		container.add(temperaturePanel);
-		container.add(coolingPanel);
-		container.add(okBtn);
+		}
+		/*
 		frame.add(container);
 		frame.pack();
-		frame.setVisible(true);
+		frame.setVisible(true);*/
 	}
 
 	public static void print(ArrayList<Double> evo) {
 		try {
-			File file = new File("out.txt");
-			PrintWriter apw = new PrintWriter(file);
+			File file2 = new File("out.txt");
+			PrintWriter apw = new PrintWriter(file2);
 			for(int i = 0;i < evo.size();i++) {
 				System.out.println(evo.get(i));
 				apw.println(evo.get(i));
 			}
 			apw.close();
 		} catch(IOException e) {
+			e.printStackTrace();
 			System.err.println("Couldn't create output file");
 		}
 	}
@@ -173,6 +171,8 @@ public class is16151852 {
 	public static double getDistance(Point p1, Point p2) {
 		double a = p1.x * p1.x;
 		double b = p2.x * p2.x;
+
+		//System.out.println("Distance between " + p1.toString() + " and " + p2.toString() + " = " + Math.sqrt(a + b));
 		return Math.sqrt(a + b);
 	}
 
@@ -267,6 +267,10 @@ class Point {
 	public Point(double x, double y) {
 		this.x = x;
 		this.y = y;
+	}
+
+	public String toString() {
+		return this.x + ":" + this.y;
 	}
 }
 
